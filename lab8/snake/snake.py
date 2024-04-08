@@ -36,19 +36,19 @@ score = 0
 level = 1
 
 def generateFood():
-    if food.can_eat(worm.points[0]):                                                            #if function can_eat passes is already means that points are matched
+    if food.can_eat(worm.points[0]):                                                            
         x1 = food.eat_points(worm.points[0]).X
         y1 = food.eat_points(worm.points[0]).Y
         
         index = 0
-        for x in foodPoints:                                                                        #searching the index of eaten food in foodPoints list
+        for x in foodPoints:                                                                        
             if x.X == x1 and x.Y == y1:
                 break
             else:
                 index += 1
 
 
-    while True:                                                                               # checking to wall and food collision 
+    while True:                                                                                
             p1 = random.randrange(0, 39) * 20
             p2 = random.randrange(0, 29) * 20
 
@@ -57,17 +57,17 @@ def generateFood():
 
             for x in worm.points:
                 if x.X == p1 and x.Y == p2:
-                    warmCheck = True                                                            #warm
+                    warmCheck = True                                                            
 
-            for x in wall.points:                                                               #wall
+            for x in wall.points:                                                               
                 if x.X == p1 and x.Y == p2:
                     wallsCheck = True
 
             if not warmCheck and not wallsCheck:
                 break    
         
-    foodPoints.pop(index)                                                                       #deliting old food point
-    foodPoints.append(Point(p1, p2))                                                            #appending new food point
+    foodPoints.pop(index)                                                                       
+    foodPoints.append(Point(p1, p2))                                                            
 
     return 0
 
@@ -85,21 +85,21 @@ while not done:
     eaten = False
     pos1 = food.can_eat(worm.points[0])
     if(pos1 != None):
-        worm.increase(pos1)                                                 #increasing worm is food eaten    
-        score += 1                                                          #score counting
+        worm.increase(pos1)                                                     
+        score += 1                                                          
         eaten = True
 
-        if score % 5 == 0:                                                  #going to next level if score is increased by 5
+        if score % 5 == 0:                                                  
             wall.next_level()
             level += 1
 
     if eaten:       
-        generateFood()                                                      #calling generateFood function if food is eaten
+        generateFood()                                                      
         eaten = False                                                       
         
     pos2 = wall.collision(worm.points[0])
     if(pos2 != None): 
-        pygame.quit()                                                       #quiting the game if wall was hitted 
+        pygame.quit()                                                       
 
     
     create_background(screen, 800, 600)
@@ -111,8 +111,8 @@ while not done:
     font = pygame.font.Font(None, 35)                               
     scoreTxt = font.render(str(score), True, "black")
     levelTxt = font.render(str(level), True, "black")
-    screen.blit(scoreTxt, [760, 20])                                        #score counter display 
-    screen.blit(levelTxt, [20, 20])                                         #level counter display
+    screen.blit(scoreTxt, [760, 20])                                        
+    screen.blit(levelTxt, [20, 20])                                         
         
     pygame.display.flip()
     clock.tick((level * 3) + 5)

@@ -3,8 +3,8 @@ from game_object import GameObject
 from game_object import Point 
 
 class Wall(GameObject):
-    def __init__(self, tile_width):                             #, points
-        super().__init__([], (255,0,0), tile_width)             #points
+    def __init__(self, tile_width):                           
+        super().__init__([], (255,0,0), tile_width)             
         self.level = 1
         self.load_level()
 
@@ -17,7 +17,7 @@ class Wall(GameObject):
         return result
     
     def load_level(self):
-        f = open("levels/level{}.txt".format(self.level), "r")                      #/Users/yerassyl/vscode/kbtu/pp2/labs/lab8/2.py/levels/level{}.txt
+        f = open("levels/level{}.txt".format(self.level), "r")                      
         row = -1
         col = -1
         for line in f:
